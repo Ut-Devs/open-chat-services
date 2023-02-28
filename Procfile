@@ -1,1 +1,1 @@
-web: python -m flask --app ./app.py run
+web: python ./app.py runserver 0.0.0.0:5000
