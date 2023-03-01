@@ -12,10 +12,11 @@ cors = CORS(app, resource={
         "origins":"*"
     }
 })
-app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app, cors_allowed_origins="*")
 
-
+@app.route('/')
+def index():
+    return 'Hello World'
 @socketio.on('connect')
 def connect():
     emit('session', {'id': str(uuid.uuid4())})
