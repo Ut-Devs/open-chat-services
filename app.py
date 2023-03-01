@@ -1,22 +1,22 @@
 from flask import Flask
 import os
-from flask_sock import Sock
+import json
+import uuid
+from flask_socketio import SocketIO, emit
 
 app = Flask(__name__)
-sock = Sock(app)
+app.config['SECRET_KEY'] = 'secret!'
+socketio = SocketIO(app, cors_allowed_origins="*")
 
 
-@app.route('/', methods=['GET'])
-def index():
-    return '{ "message":"Open chat server", }'
-
-
-@sock.route('/echo', methods=['GET'])
-def echo(sock):
-    while True:
-        data = sock.receive()
-        sock.send(data)
+@socketio.on('connect')
+def connect():
+    emit('session', {'id': str(uuid.uuid4())})
+@socketio.on('sendMessage')
+def send_message(data):
+    print(data)
+    emit('messageReceived', json.loads(data), broadcast=True)
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
-    app.run(debug=True, host='0.0.0.0', port=port)
+    socketio.run(app, host='0.0.0.0', port=port)
