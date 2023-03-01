@@ -12,7 +12,7 @@ cors = CORS(app, resource={
         "origins":"*"
     }
 })
-socketio = SocketIO(app, cors_allowed_origins="*")
+socketio = SocketIO(app)
 
 @app.route('/')
 def index():
