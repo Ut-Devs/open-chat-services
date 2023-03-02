@@ -6,7 +6,8 @@ from flask_cors import CORS
 from flask_socketio import SocketIO, emit
 
 app = Flask(__name__)
-socketio = SocketIO(app)
+cors = CORS(app,resources={r"/api/*":{"origins":"*"}})
+socketio = SocketIO(app, cors_allowed_origins="*")
 
 @app.route('/')
 def index():
