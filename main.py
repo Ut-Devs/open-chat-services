@@ -1,6 +1,6 @@
 from openchat import create_app
 from flask_cors import CORS
-from flask_socketio import SocketIO, emit
+from flask_socketio import SocketIO
 import os
 
 app = create_app()
