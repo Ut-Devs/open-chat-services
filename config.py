@@ -1,0 +1,4 @@
+DB_NAME = "database.db"
+DEBUG = True
+SQLALCHEMY_DATABASE_URI = f'sqlite:///{DB_NAME}'
+SQLALCHEMY_TRACK_MODIFICATIONS = False
